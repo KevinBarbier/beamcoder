@@ -9,31 +9,25 @@
                   "src/codec_par.cc", "src/format.cc",
                   "src/codec.cc" ],
     "conditions": [
-      ['OS!="win"', {
-        "defines": [
-          "__STDC_CONSTANT_MACROS"
+      ['OS=="linux"', {
+        "include_dirs" : [
+          "/usr/include/ffmpeg",
+          "/usr/local/include"
         ],
-        "cflags_cc!": [
-          "-fno-rtti",
-          "-fno-exceptions"
+        "library_dirs": [
+          "/usr/local/lib",
+          "/usr/lib"
+        ]
+      }], 
+      ['OS=="mac"', {
+        "include_dirs" : [
+          "/usr/local/Cellar/ffmpeg/4.2.2/include"
         ],
-        "cflags_cc": [
-          "-std=c++11",
-          "-fexceptions"
-        ],
-        "link_settings": {
-          "libraries": [
-            "-lavcodec",
-            "-lavdevice",
-            "-lavfilter",
-            "-lavformat",
-            "-lavutil",
-            "-lpostproc",
-            "-lswresample",
-            "-lswscale"
-          ]
-        }
-      }],
+        "library_dirs": [
+          "/usr/local/Cellar/ffmpeg/4.2.2/lib",
+        ]
+      }],      
+
       ['OS=="win"', {
         "configurations": {
           "Release": {
